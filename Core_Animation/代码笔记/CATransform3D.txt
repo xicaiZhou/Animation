@@ -1,0 +1,15 @@
+CATransform3D是一个可以在3维空间内做变换的4x4的矩阵。
+3D的效果很简单，就是多了个z轴的处理，所以之前的评议旋转和缩放就变成了
+CATransform3DMakeRotation(CGFloat angle, CGFloat x, CGFloat y, CGFloat z)
+CATransform3DMakeScale(CGFloat sx, CGFloat sy, CGFloat sz)
+CATransform3DMakeTranslation(Gloat tx, CGFloat ty, CGFloat tz)
+
+透视投影
+在真实世界中，当物体远离我们的时候，由于视角的原因看起来会变小，理论上说远离我们的视图的边要比靠近视角的边跟短，但实际上并没有发生，而我们当前的视角是等距离的，也就是在3D变换中任然保持平行，和之前提到的仿射变换类似。
+在CATransform3D的透视效果通过一个矩阵中一个很简单的元素来控制：m34。m34用于按比例缩放X和Y的值来计算到底要离视角多远。m34的默认值是0，我们可以通过设置m34为-1.0 / d来应用透视效果，d代表了想象中视角相机和屏幕之间的距离，以像素为单位,通常500-1000。
+
+CATransform3D  affine = CATransform3DIdentity;
+affine.m34 = -1.0 / 500.0;
+
+affine = CATransform3DRotate(affine, M_PI_4, 0, 1, 0);
+trans.layer.transform = affine;

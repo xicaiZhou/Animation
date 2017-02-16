@@ -1,0 +1,77 @@
+
+核心动画之作用在层上面.
+动画的本质是改图层的某一个属性.
+CABasicAnimation *anim = [CABasicAnimation animation];
+图层有那些属性,这里才能写那些属性.
+anim.keyPath = @"transform.scale";
+anim.toValue = @0.5;
+告诉动画完成的时候不要移除
+anim.removedOnCompletion = NO;
+保存动画最前面的效果.
+anim.fillMode = kCAFillModeForwards;
+把动画添加到层上面.
+[_redView.layer addAnimation:anim forKey:nil];
+
+官方文档KeyPath：
+
+rotation  旋转
+
+rotation.x
+
+rotation.y
+
+rotation.z
+
+scale  缩放
+
+scale.x
+
+scale.y
+
+scale.z
+
+translation  平移
+
+translation.x
+
+translation.y
+
+translation.z
+
+opacity 透明度 参数：透明度 0.5
+
+backgroundColor 背景颜色 参数：颜色 (id)[[UIColor redColor] CGColor]
+
+cornerRadius 圆角 参数：圆角半径 5
+
+borderWidth 边框宽度 参数：边框宽度 5
+
+bounds 大小 参数：CGRect
+
+contents 内容 参数：CGImage
+
+contentsRect 可视内容 参数：CGRect 值是0～1之间的小数
+
+hidden 是否隐藏
+
+position
+
+shadowColor
+
+shadowOffset
+
+shadowOpacity
+
+shadowRadius
+
+CABasicAnimation的常用属性
+
+- duration： 动画持续时间,以秒为单位
+- fromValue： 动画的开始状态(绝对定位)
+- toValue：动画的结束状态(绝对定位)
+- byValue：动画的相对结束位置(相对定位)。
+- repeatCount:表示动画重复次数。默认为0，指定为HUGE_VALF， 永久执行.
+- autoreverses:动画结束之后是否执行逆动画。
+- beginTime:指定动画执行的时间。如果需要动画延迟，可以加上CACurrentMediaTime()+ 延迟的秒数。
+- timingFunction: 设定动画的速度变化。
+- removedOnCompletion：动画执行完成之后，是否将动画移除掉

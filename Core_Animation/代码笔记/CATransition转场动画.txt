@@ -1,0 +1,62 @@
+
+1.什么是转场动画?
+就是从一个场景转换到另一个场景,像导航控制器的push效果,就是一个转场.
+
+2.如何创建转场动画
+创建转场动画
+CATransition *anim = [CATransition animation];
+设置转场类型
+anim.type = @"cube";
+anim.duration = 1;
+设置转场的方向
+anim.subtype = kCATransitionFromLeft;
+设置动画的开始位置
+anim.startProgress = 0.5;
+设置动画的结束位置
+anim.endProgress  =0.8;
+添加动画.了
+[_imageV.layer addAnimation:anim forKey:nil];
+要执行动画的代码称为转场代码.
+转场动画要和转场代码写在同一个方法当中才有动画效果.
+
+3.UIView进行转场动画
+[UIView transitionWithView:self.imageV duration:1
+options:UIViewAnimationOptionTransitionFlipFromRight
+animations:^{
+转场代码
+} completion:^(BOOL finished) {
+动画执行完毕时调用.
+}];
+
+使用UIView转场的类型比较少.
+
+CATransition的type：
+
+fade  淡入淡出
+
+push  推挤
+
+reveal 揭开
+
+moveIn  覆盖
+
+cube  立方体
+
+suckEffect  吮吸
+
+oglFlip   翻转
+
+rippleEffect 波纹
+
+pageCurl  反翻页
+
+cameraIrisHollowOpen  开镜头
+
+cameraIrisHollowClose  关镜头
+
+CATransition属性
+属性          解读
+
+type     动画过渡类型
+
+subtype  动画过渡方向

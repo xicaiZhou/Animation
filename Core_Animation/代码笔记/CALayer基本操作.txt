@@ -1,0 +1,59 @@
+       01-CALayer的基本操作.
+
+1.CALayer简介:
+CALayer我们又称它叫做层.
+在每个UIView内部都有一个layer这样一个属性.
+UIView之所以能够显示,就是因为它里面有这个一个层,才具有显示的功能.
+我们通过操作CALayer对象,可以很方便地调整UIView的一些外观属性.
+可以给UIView设置阴影,圆角,边框等等...
+
+2.操作layer改变UIView外观.
+
+2.1.设置阴影
+默认图层是有阴影的, 只不过,是透明的
+_RedView.layer.shadowOpacity = 1;
+设置阴影的圆角
+_RedView.layer.shadowRadius  =10;
+设置阴影的颜色,把UIKit转换成CoreGraphics框架,用.CG开头
+_RedView.layer.shadowColor = [UIColor blueColor].CGColor;
+
+2.2.设置边框
+设置图层边框,在图层中使用CoreGraphics的CGColorRef
+_RedView.layer.borderColor = [UIColor whiteColor].CGColor;
+_RedView.layer.borderWidth = 2;
+
+2.3.设置圆角
+图层的圆角半径,圆角半径为宽度的一半, 就是一个圆
+_RedView.layer.cornerRadius = 50;
+
+3.操作layer改变UIImageView的外观.
+
+设置图形边框
+_imageView.layer.borderWidth = 2;
+_imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+
+设置图片的圆角半径
+_imageView.layer.cornerRadius = 50;
+裁剪,超出裁剪区域的部分全部裁剪掉
+_imageView.layer.masksToBounds = YES;
+注意:UIImageView当中Image并不是直接添加在层上面的.这是添加在layer当中的contents里.
+我们设置层的所有属性它只作用在层上面.对contents里面的东西并不起作用.所以我们看不到图片有圆角的效果.
+想要让图片有圆角的效果.可以把masksToBounds这个属性设为YES,
+当设为YES,把就会把超过根层以外的东西都给裁剪掉.
+
+4-position和anchorPoint
+
+position和anchorPoint是CAlayer的两个属性.
+我们以前修改一个控件的位置都是能过Frame的方式进行修改.
+现在利用CALayer的position和anchorPoint属性也能够修改控件的位置.
+这两个属性是配合使用的.
+position:它是用来设置当前的layer在父控件当中的位置的.
+所以它的坐标原点.以父控件的左上角为(0.0)点.
+
+anchorPoint:它是决点CALayer身上哪一个点会在position属性所指的位置
+anchorPoint它是以当前的layer左上角为原点(0.0)
+它的取值范围是0~1,它的默认在中间也就是(0.5,0.5)的位置.
+anchorPoint又称锚点.就是把锚点定到position所指的位置.
+
+两者结合使用.想要修改某个控件的位置,我们可以设置它的position点.
+设置完毕后.layer身上的anchorPoint会自动定到position所在的位置.

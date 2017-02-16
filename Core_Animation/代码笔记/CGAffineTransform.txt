@@ -1,0 +1,29 @@
+            CGAffineTransform 仿射变形
+cg：Core Graphics核心图形
+Affine：仿射的；Transform：改变，使…变形；转换。
+     CGAffineTransform中涉及到了CGPoint和矩阵的内容，CGAffineTransform是一个可以和二维空间向量（例如CGPoint）做乘法的3X2的矩阵。CGAffineTransform是一个可以和二维空间向量（例如CGPoint）做乘法的3X2的矩阵。当对图层应用变换矩阵，图层矩形内的每一个点都被相应地做变换，从而形成一个新的四边形的形状。CGAffineTransform中的“仿射”的意思是无论变换矩阵用什么值，图层中平行的两条线在变换之后任然保持平行，CGAffineTransform可以做出任意符合上述标注的变换。
+*****************************************创建一个CGAffineTransform,如下几个函数都创建了一个CGAffineTransform实例：
+旋转
+CGAffineTransformMakeRotation(CGFloat angle)
+尺寸放大或缩小
+CGAffineTransformMakeScale(CGFloat sx, CGFloat sy)
+平移
+CGAffineTransformMakeTranslation(CGFloat tx, CGFloat ty);
+
+CALayer同样也有一个transform属性，但它的类型是CATransform3D，而不是CGAffineTransform，本章后续将会详细解释。CALayer对应于UIView的transform属性叫做affineTransform.
+UIView *trans = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 200, 200)];
+[self.view addSubview:trans];
+trans.backgroundColor = [UIColor lightGrayColor];
+
+CALayer *lay = [CALayer layer];
+lay.contents = (__bridge id _Nullable)([UIImage imageNamed:@"logo-60"].CGImage);
+lay.frame = CGRectMake(25, 25, 150, 150);
+[trans.layer addSublayer:lay];
+//    trans.transform =  CGAffineTransformMakeRotation(M_PI_4);
+trans.layer.affineTransform =CGAffineTransformMakeRotation(M_PI_4);//两个一样
+
+*****************************************剪切变换
+这个不是常用，CGAffineTransform没有直接提供函数，它的效果叫倾斜更好，就是设置 CGAffineTransform 的 c 和d 属性。
+CGAffineTransform affine = CGAffineTransformIdentity;
+affine.c = 1;
+affine.d = 1;
