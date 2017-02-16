@@ -30,9 +30,9 @@
     
     [UIView animateWithDuration:0.5 animations:^{
         
-        /*
-         1.用路径path的方法
-           1）贝塞尔曲线UIBezierPath（圆弧运动）
+       
+        // 1.用路径path的方法
+          // 1）贝塞尔曲线UIBezierPath（圆弧运动）
          CAKeyframeAnimation *key = [CAKeyframeAnimation animation];
          key.keyPath = @"position";
          UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.view.center.x, 150) radius:150 startAngle:3.1415926 endAngle:0 clockwise:NO];
@@ -47,7 +47,7 @@
          key.fillMode = kCAFillModeForwards;
 
          [_imageV.layer addAnimation:key forKey:nil];
-         
+          /*
          2)CGMutablePathRef
          
          CAKeyframeAnimation *key = [CAKeyframeAnimation animationWithKeyPath:@"position"];
